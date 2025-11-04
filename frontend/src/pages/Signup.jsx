@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
   const [form, setForm] = useState({
@@ -8,8 +9,9 @@ const Signup = () => {
     confirmPassword: "",
     field: "",
     goalHours: "",
-  });
 
+  });
+  const navigate = useNavigate();
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
@@ -18,6 +20,9 @@ const Signup = () => {
     e.preventDefault();
     console.log("Signup Data:", form);
     // You can later connect this to backend (MongoDB + Express)
+    // inside handleSubmit after success:
+    navigate("/dashboard");
+
   };
 
   return (
@@ -76,24 +81,7 @@ const Signup = () => {
             />
           </div>
 
-          <div>
-            <label className="block text-sm text-gray-700 mb-1">Field of Study</label>
-            <select
-              name="field"
-              value={form.field}
-              onChange={handleChange}
-              className="w-full border border-gray-200 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-[#A3C4F3]"
-              required
-            >
-              <option value="">Select</option>
-              <option>Engineering</option>
-              <option>Medicine</option>
-              <option>Arts</option>
-              <option>Commerce</option>
-              <option>Science</option>
-              <option>Other</option>
-            </select>
-          </div>
+        
 
           <div>
             <label className="block text-sm text-gray-700 mb-1">Daily Study Goal (hours)</label>
